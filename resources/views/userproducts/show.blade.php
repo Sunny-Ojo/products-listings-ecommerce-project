@@ -1,10 +1,8 @@
 @extends('layouts.nav')
-@section('title', 'Products listing |  item information')
-
 @section('content')
 
-<h4 class="lead text-center text-white bg-success p-2 mt-2">{{$product->name}}</h4>
-<a href="/products" class="btn btn-info mb-1">Back</a>
+<h4 class="lead text-center text-white bg-success p-2">{{$product->name}}</h4>
+<a href="/userproducts" class="btn btn-info mb-1">Back</a>
 @include('layouts.msg')
 
 <div class="container row mt-4">
@@ -38,14 +36,11 @@ src="/storage/images/{{ $product->image}}"
           </smal
           ></a>
         <a href="/items/{{$product->id}}"  class=" btn btn-success mt-1 m-1 ">Buy now {{ $product->prize }}</a>
-
         <a href="/addtowishlist/{{$product->id}}" class=" text-white btn btn-primary mt-1 m-1"> Add to wishlist</a>
-@auth
-        @if (auth()->user()->id == $product->user_id)
+@if (auth()->user()->id == $product->user_id)
 <a href="/products/{{$product->id}}/edit" class="mt-1 m-1  btn btn-secondary">Edit this product</a>
 
 @endif
-@endauth
 </div>
 
     </div>

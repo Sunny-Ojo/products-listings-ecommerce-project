@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -15,7 +14,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
+    public $fillable = [
         'name', 'email', 'password',
     ];
 
@@ -24,7 +23,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
+    protected $_hidden = [
         'password', 'remember_token',
     ];
 
@@ -33,7 +32,19 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
+    protected $_casts = [
         'email_verified_at' => 'datetime',
     ];
+    protected function _shop()
+    {
+        return $this->hasMany('App/Shop');
+    }
+    protected function _wishlist()
+    {
+        return $this->hasMany('App/Wishlist');
+    }
+    protected function _cart()
+    {
+        return $this->hasMany('App/Cart');
+    }
 }

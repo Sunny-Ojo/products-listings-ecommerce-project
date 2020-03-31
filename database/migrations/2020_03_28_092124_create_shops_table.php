@@ -20,6 +20,8 @@ class CreateShopsTable extends Migration
             $table->string('image');
             $table->mediumText('about');
             $table->integer('rating');
+            $table->integer('user_id');
+            $table->string('category');
             $table->timestamps();
         });
     }

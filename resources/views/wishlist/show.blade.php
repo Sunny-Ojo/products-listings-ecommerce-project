@@ -3,8 +3,8 @@
 
 @section('content')
 
-<h4 class="lead text-center text-white bg-success p-2 mt-2">{{$product->name}}</h4>
-<a href="/products" class="btn btn-info mb-1">Back</a>
+<h4 class="lead text-center text-white bg-success p-2">{{$product->name}}</h4>
+<a href="/wishlist" class="btn btn-info">Back</a>
 @include('layouts.msg')
 
 <div class="container row mt-4">
@@ -35,17 +35,15 @@ src="/storage/images/{{ $product->image}}"
             &#9733; &#9733; &#9733; &#9733;
             &#9733;
             @endif
-          </smal
+          </small
           ></a>
         <a href="/items/{{$product->id}}"  class=" btn btn-success mt-1 m-1 ">Buy now {{ $product->prize }}</a>
+@if (auth()->user()->id == $product->user_id)
+{!! Form::open(['action' => ['WishlistController@destroy', $product->id], 'method'=>'DELETE']) !!}
 
-        <a href="/addtowishlist/{{$product->id}}" class=" text-white btn btn-primary mt-1 m-1"> Add to wishlist</a>
-@auth
-        @if (auth()->user()->id == $product->user_id)
-<a href="/products/{{$product->id}}/edit" class="mt-1 m-1  btn btn-secondary">Edit this product</a>
-
+{{ Form::submit('Remove from wishlist', ['class' => ['btn btn-danger', 'm-1']])}}
+{!! Form::close() !!}
 @endif
-@endauth
 </div>
 
     </div>

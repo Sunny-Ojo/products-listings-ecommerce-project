@@ -8,7 +8,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ProductsController extends Controller
+class UserproductsController extends Controller
 {
     public function __construct()
     {
@@ -84,7 +84,7 @@ class ProductsController extends Controller
         $product->category = $request->category;
 
         $product->save();
-        return redirect('/products')->with('success', 'Product was successfully added');
+        return redirect('/userproducts')->with('success', 'Product was successfully added');
 
     }
 
@@ -112,12 +112,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-
         $product = Shop::find($id);
-        $user_id = $product->user_id;
-        if ($user_id != auth()->user()->id) {
-            return redirect()->back()->with('error', 'Access is denied');
-        }$cat = Category::all();
+        $cat = Category::all();
         $products = Shop::orderBy('created_at', 'desc')->paginate(9);
         return view('products.edit')->with(['product' => $product, 'cat' => $cat, 'products' => $products]);
 
@@ -169,7 +165,7 @@ class ProductsController extends Controller
         $product->category = $request->category;
 
         $product->save();
-        return redirect('/products')->with('success', 'Product was successfully updated');
+        return redirect('/userproducts')->with('success', 'Product was successfully updated');
 
     }
 

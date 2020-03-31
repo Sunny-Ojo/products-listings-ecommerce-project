@@ -9,7 +9,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 
-        <title>@yield('title', 'Sunshinecoders porducts listing | Welcome')</title>
+        <title>@yield('title', 'Sunshinecoders products listing | Welcome')</title>
 
         <!-- Bootstrap core CSS -->
         <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -20,6 +20,7 @@
     </head>
 
     <body>
+
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
@@ -46,11 +47,9 @@
                         <li class="nav-item">
                         <a class="nav-link" href="{{route('about')}}">About</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('services')}}">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('contact')}}">Contact</a>
+                            <a class="nav-link" href="{{route('contact.create')}}">Contact</a>
                         </li>
                         @guest
                         <li class="nav-item">
@@ -68,25 +67,25 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+
                                 <a class="dropdown-item" href="{{ route('products.create') }}">
-                                    {{ __('Create a new Product') }}
+                                   <i class="fa fa-edit"></i> {{ __('Create a new Product') }}
                                 </a>
 
                                 <a class="dropdown-item" href="{{ route('viewmyproducts') }}">
-                                    {{ __('View  your  Products') }}
+                                  <i class="fa fa-th-list"></i>  {{ __('My    Products') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('viewcart') }}">
-                                    {{ __('View  your  Cart') }}
+                                <i class="fa fa-shopping-basket"></i>    {{ __('View    Cart') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('viewwishlist') }}">
-                                    {{ __('View  your  wishist') }}
+                                  <i class="fa fa-heart"></i>  {{ __('My    wishist') }}
                                 </a>
-
+                               <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out-alt"></i>    {{ __('Logout') }}
+                                </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
@@ -101,16 +100,20 @@
 
         <!-- Page Content -->
         <div class="container">
-            <div class="row mt-5">
+            <div class="row ">
                 <div class="col-lg-3">
-                    <h1 class="my-4">Items<span class="text-danger">S</span><span class="text-warning">how</span></h1>
+                    <h1 class="my-4">Items<span class="text-danger">S</span><span class="text-warning">how</span> &circledR;</h1>
                     <div class="list-group">
                         <h4 class="bg-success text-white p-1 text-center">Categories</h4>
+                        <a href="/products " class="list-group-item">All products</a>
+
                         @if (count($cat)> 0)
                             @foreach ($cat as $item)
                     <a href="/categories/{{$item->name}} " class="list-group-item">{{ $item->name }}</a>
 
                             @endforeach
+                            @else
+                            <p>No Categories yet</p>
                         @endif
                     </div>
                 </div>
@@ -143,21 +146,21 @@
                             <div class="carousel-item active">
                                 <img
                                     class="d-block img-fluid"
-                                    src="http://placehold.it/900x350"
+                                    src="{{ asset('img/image1.jpg') }}"
                                     alt="First slide"
                                 />
                             </div>
                             <div class="carousel-item">
                                 <img
                                     class="d-block img-fluid"
-                                    src="http://placehold.it/900x350"
+                                    src="{{ asset('img/download.jpg') }}"
                                     alt="Second slide"
                                 />
                             </div>
                             <div class="carousel-item">
                                 <img
                                     class="d-block img-fluid"
-                                    src="http://placehold.it/900x350"
+                                    src="{{ asset('img/img2.jpg') }}"
                                     alt="Third slide"
                                 />
                             </div>
@@ -187,6 +190,7 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
+                    <hr class="bg-warning">
         <div class="row">
                                 @yield('content')
 

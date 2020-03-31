@@ -18,10 +18,16 @@ Route::get('/categories/{name}', 'CategoryController@index');
 
 Auth::routes();
 Route::resource('products', 'ProductsController');
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/about', 'ShopController@index')->name('about');
-Route::get('/services', 'ShopController@index')->name('services');
-Route::get('/contact', 'ShopController@index')->name('contact');
-Route::get('/allproducts', 'ShopController@show')->name('products.index');
-Route::get('/carts', 'ShopController@cart')->name('cart');
+Route::resource('wishlists', 'WishlistController');
+Route::resource('userproducts', 'UserproductsController');
+Route::resource('contact', 'ContactController');
+Route::resource('carts', 'CartController');
+Route::get('/home', function () {
+    return redirect('/products');
+});
+Route::get('/about', 'ShopController@about')->name('about');
+Route::get('/viewcart', 'CartController@index')->name('viewcart');
+Route::get('/items/{product}', 'CartController@store')->name('buyproduct')->middleware('auth');
+Route::get('/wishlist', 'WishlistController@index')->name('viewwishlist');
+Route::get('/addtowishlist/{product}', 'WishlistController@store')->name('addtowishlist');
 Route::get('/myproducts', 'ShopController@viewUserProducts')->name('viewmyproducts');

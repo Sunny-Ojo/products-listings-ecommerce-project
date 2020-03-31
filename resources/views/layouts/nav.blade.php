@@ -20,6 +20,7 @@
     </head>
 
     <body>
+
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
@@ -46,11 +47,9 @@
                         <li class="nav-item">
                         <a class="nav-link" href="{{route('about')}}">About</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('services')}}">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('contact')}}">Contact</a>
+                            <a class="nav-link" href="{{route('contact.create')}}">Contact</a>
                         </li>
                         @guest
                         <li class="nav-item">
@@ -68,41 +67,37 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
                                 <a class="dropdown-item" href="{{ route('products.create') }}">
-                                    {{ __('Create a new Product') }}
-                                </a>
+                                    <i class="fa fa-edit"></i> {{ __('Create a new Product') }}
+                                 </a>
 
-
-                                <a class="dropdown-item" href="{{ route('viewmyproducts') }}">
-                                    {{ __('View  your  Products') }}
+                                 <a class="dropdown-item" href="{{ route('viewmyproducts') }}">
+                                   <i class="fa fa-th-list"></i>  {{ __('My    Products') }}
                                 </a>
-                                <a class="dropdown-item" href="{{ route('viewcart') }}">
-                                    {{ __('View  your  Cart') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('viewwishlist') }}">
-                                    {{ __('View  your  wishist') }}
-                                </a>
+                                 <a class="dropdown-item" href="{{ route('viewcart') }}">
+                                    <i class="fa fa-shopping-basket"></i>    {{ __('View    Cart') }}
+                                    </a>
+                                 <a class="dropdown-item" href="{{ route('viewwishlist') }}">
+                                   <i class="fa fa-heart"></i>  {{ __('My    wishist') }}
+                                 </a>
+   <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();">
+                                 <i class="fa fa-sign-out-alt"></i>    {{ __('Logout') }}
+                                 </a>
+                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                     @csrf
+                                 </form>
+                             </div>
+                         </li>
+                     @endguest
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-
-                    </ul>
-                </div>
-            </div>
+                     </ul>
+                 </div>
+             </div>
         </nav>
 
         <div class="container">
-            <hr>
-            {{-- @include('layouts.msg') --}}
 
 @yield('content')
         </div>

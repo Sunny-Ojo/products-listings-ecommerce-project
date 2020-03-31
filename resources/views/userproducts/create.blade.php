@@ -5,42 +5,32 @@
             <div class="lead text-center bg-dark text-white-50 mb-3">
                 Create a new Product
             </div>
-  {{-- @include('layouts.msg') --}}
+  @include('layouts.msg')
             {!! Form::open(['action'=>'ProductsController@store', 'method'=> 'POST', 'files'=>'true']) !!}
             <div class="form-group">
                 {{ Form::label('name' , 'Enter name of product') }}
                 {{ Form::text('name', '', ['class'=>'form-control', 'placeholder'=>'name of product']) }}
-          @error('name')  <li class="text-danger">{{ $message }}</li> @enderror
             </div>
             <div class="form-group">
                 {{ Form::label('prize' , 'Enter prize of product') }}
                 {{ Form::text('prize', '', ['class'=>'form-control', 'placeholder'=>'prize of product']) }}
-                @error('prize')  <li class="text-danger">{{ $message }}</li> @enderror
-
             </div>
             <div class="form-group">
                 {{ Form::label('category' , 'Enter category of product') }}
                 {{ Form::text('category', '', ['class'=>'form-control', 'placeholder'=>'category of product']) }}
-                @error('category')  <li class="text-danger">{{ $message }}</li> @enderror
-
             </div>
 
             <div class="form-group">
                 {{ Form::label('productInformation' , 'Enter Information about product') }}
                 {{ Form::textarea('productInformation', '', ['class'=>'form-control', 'placeholder'=>'Information of the product']) }}
-                @error('productInformation')  <li class="text-danger">{{ $message }}</li> @enderror
             </div>
             <div class="form-group">
                 {{ Form::label('rating' , 'choose rating for the product') }}
                 {{ Form::select('rating',['1' =>'1', '2'=>'2','3'=>'3','4'=>'4','5'=>'5'],  '', ['class'=>'form-control', 'placeholder'=>'product rating ']) }}
-                @error('rating')  <li class="text-danger">{{ $message }}</li> @enderror
-
             </div>
             <div class="form-group">
                 {{ Form::label('image' , 'upload image of product') }} <br>
                 {{ Form::file('image') }}
-                @error('image')  <li class="text-danger">{{ $message }}</li> @enderror
-
             </div>
             <div class="form-group">
                 {{ Form::submit('Create',['class'=> 'btn btn-outline-primary btn-block ']) }}
